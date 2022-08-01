@@ -1,25 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-
-/**
- * Route::get    Consultar
- * Route::post   Guardar
- * Route::put    Actualizar
- * Route::delete Eliminar
- */
 
 Route::get('/', function () {
-    return 'Ruta home';
+    return view('home');
 });
 Route::get('blog', function () {
-    return 'Listado de publicaciones';
+    //Consulta a base de datos
+    $posts = [
+        ['id' => 1, 'title' => 'PHP', 'slug' => 'PHP'],
+        ['id' => 2, 'title' => 'LARAVEL', 'slug' => 'LARAVEL']
+    ];
+
+    return view('blog', ['posts' => $posts]);
 });
 Route::get('blog/{slug}', function ($slug) {
     //Consulta a base de datos
-    return $slug;
-});
-Route::get('buscar', function (Request $request) {
-    return $request->all();
+    $post = $slug;
+
+    return view('post', ['post' => $post]);
 });
