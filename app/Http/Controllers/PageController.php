@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
 
-use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -11,19 +11,18 @@ class PageController extends Controller
     }
 
     public function blog(){
-        //Consulta a base de datos
-        $posts = [
-            ['id' => 1, 'title' => 'PHP', 'slug' => 'PHP'],
-            ['id' => 2, 'title' => 'LARAVEL', 'slug' => 'LARAVEL']
-        ];
+
+        //$posts = Post::get();
+        //$posts = Post::first();
+        //$posts = Post::find(25);
+        //dd($posts);
+
+        $posts = Post::latest()->paginate();
 
         return view('blog', ['posts' => $posts]);
     }
 
-    public function post($slug){
-        //Consulta a base de datos
-        $post = $slug;
-
+    public function post(Post $post){
         return view('post', ['post' => $post]);
     }
 }
