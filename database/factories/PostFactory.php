@@ -22,5 +22,6 @@ class PostFactory extends Factory
             'slug' => Str::slug($title),
             'body' => $this->faker->text(2200)
         ];
+
     }
 }
