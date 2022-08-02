@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function(){
@@ -12,5 +13,7 @@ Route::controller(PageController::class)->group(function(){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('posts', PostController::class)->except('show');
 
 require __DIR__.'/auth.php';
