@@ -11,6 +11,14 @@ class PostController extends Controller
         return view('posts.index', ['posts' => $posts]);
     }
 
+    public function create(){
+        return view('posts.create');
+    }
+
+    public function edit(Post $post){
+        return view('posts.edit', ['post' => $post]);
+    }
+
     public function destroy(Post $post){
         $post->delete();
 
