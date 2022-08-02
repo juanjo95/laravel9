@@ -10,4 +10,11 @@ class PostController extends Controller
         $posts = Post::latest()->paginate();
         return view('posts.index', ['posts' => $posts]);
     }
+
+    public function destroy(Post $post){
+        $post->delete();
+
+        /* Retornar a la vista anterior */
+        return back();
+    }
 }
