@@ -18,7 +18,7 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-        /*  */
+        /* Nueva publicacion a partir de usuario que este logueado */
         $post = $request->user()->posts()->create([
             'title' => $title = $request->title,
             'slug'  => Str::slug($title),
@@ -30,6 +30,17 @@ class PostController extends Controller
 
     public function edit(Post $post){
         return view('posts.edit', ['post' => $post]);
+    }
+
+    public function update(Request $request, Post $post){
+        /* Nueva publicacion a partir de usuario que este logueado */
+        $post->update([
+            'title' => $title = $request->title,
+            'slug'  => Str::slug($title),
+            'body'  => $request->body,
+        ]);
+
+        return redirect()->route('posts.edit', $post);
     }
 
     public function destroy(Post $post){
