@@ -18,6 +18,12 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
+
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         /* Nueva publicacion a partir de usuario que este logueado */
         $post = $request->user()->posts()->create([
             'title' => $title = $request->title,
@@ -33,7 +39,12 @@ class PostController extends Controller
     }
 
     public function update(Request $request, Post $post){
-        /* Nueva publicacion a partir de usuario que este logueado */
+
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         $post->update([
             'title' => $title = $request->title,
             'slug'  => Str::slug($title),
